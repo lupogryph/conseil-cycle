@@ -1,26 +1,21 @@
-import { Component } from '@angular/core';
-import { MeetingDto, MeetingService } from '../openapi';
-import { Observable, tap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { MeetingDto } from '../openapi';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-meetings',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [ AsyncPipe, CommonModule, MatCardModule, MatButtonModule, MatIconModule ],
   templateUrl: './meetings.component.html',
   styleUrl: './meetings.component.scss',
 })
 export class MeetingsComponent {
-  meetings$: Observable<MeetingDto[]> = new Observable();
+  @Input()
+  meetings!: MeetingDto[];
 
-  constructor(private meetingService: MeetingService) {}
+  constructor() {}
 
-  ngOnInit() {
-    console.log(this.meetingService.configuration);
-    this.meetings$ = this.meetingService.meetingsControllerFindAll().pipe(
-      tap((o) => {
-        console.log(o);
-      })
-    );
-  }
 }

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 
@@ -8,12 +8,17 @@ import { environment } from '../environments/environment';
 import { AuthApiService } from './auth.api.service';
 import { Configuration } from './openapi/configuration';
 
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr);
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
       provide: Configuration,
       useFactory: (authService: AuthApiService) =>
