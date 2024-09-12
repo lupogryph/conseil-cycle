@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 3rem;
   justify-content: center;
-  height: 100%;
+  min-height: 100%;
   padding: 0 3rem;
   .icon {
     mat-icon {
@@ -15,7 +15,7 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem;
     justify-content: center;
   }
 }

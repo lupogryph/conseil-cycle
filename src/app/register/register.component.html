@@ -12,9 +12,6 @@
 <mat-form-field>
   <mat-label>Prénom</mat-label>
   <input matInput formControlName="firstName">
-  @if (form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')) {
-    <mat-error>Adresse email non valide</mat-error>
-  }
 </mat-form-field>
 <mat-form-field>
   <mat-label>Nom</mat-label>
