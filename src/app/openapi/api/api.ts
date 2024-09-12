@@ -1,0 +1,13 @@
+export * from './admin.service';
+import { AdminService } from './admin.service';
+export * from './admin.serviceInterface';
+export * from './auth.service';
+import { AuthService } from './auth.service';
+export * from './auth.serviceInterface';
+export * from './meeting.service';
+import { MeetingService } from './meeting.service';
+export * from './meeting.serviceInterface';
+export * from './user.service';
+import { UserService } from './user.service';
+export * from './user.serviceInterface';
+export const APIS = [AdminService, AuthService, MeetingService, UserService];
