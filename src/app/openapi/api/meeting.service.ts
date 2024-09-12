@@ -19,6 +19,8 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { CreateMeetingDto } from '../model/create-meeting-dto';
+// @ts-ignore
+import { MeetingDto } from '../model/meeting-dto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -398,10 +400,10 @@ export class MeetingService implements MeetingServiceInterface {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public meetingsControllerFindAll(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public meetingsControllerFindAll(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public meetingsControllerFindAll(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public meetingsControllerFindAll(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public meetingsControllerFindAll(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<MeetingDto>>;
+    public meetingsControllerFindAll(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<MeetingDto>>>;
+    public meetingsControllerFindAll(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<MeetingDto>>>;
+    public meetingsControllerFindAll(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -416,6 +418,7 @@ export class MeetingService implements MeetingServiceInterface {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -446,7 +449,7 @@ export class MeetingService implements MeetingServiceInterface {
         }
 
         let localVarPath = `/meetings`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<MeetingDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -465,10 +468,10 @@ export class MeetingService implements MeetingServiceInterface {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public meetingsControllerFindBetween(from: string, to: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public meetingsControllerFindBetween(from: string, to: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public meetingsControllerFindBetween(from: string, to: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public meetingsControllerFindBetween(from: string, to: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public meetingsControllerFindBetween(from: string, to: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<MeetingDto>>;
+    public meetingsControllerFindBetween(from: string, to: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<MeetingDto>>>;
+    public meetingsControllerFindBetween(from: string, to: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<MeetingDto>>>;
+    public meetingsControllerFindBetween(from: string, to: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (from === null || from === undefined) {
             throw new Error('Required parameter from was null or undefined when calling meetingsControllerFindBetween.');
         }
@@ -489,6 +492,7 @@ export class MeetingService implements MeetingServiceInterface {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -519,7 +523,7 @@ export class MeetingService implements MeetingServiceInterface {
         }
 
         let localVarPath = `/meetings/${this.configuration.encodeParam({name: "from", value: from, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "date-time"})}/${this.configuration.encodeParam({name: "to", value: to, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "date-time"})}`;
-        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<MeetingDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

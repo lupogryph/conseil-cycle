@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { CreateMeetingDto } from '../model/models';
+import { MeetingDto } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -56,7 +57,7 @@ export interface MeetingServiceInterface {
      * 
      * 
      */
-    meetingsControllerFindAll(extraHttpRequestParams?: any): Observable<{}>;
+    meetingsControllerFindAll(extraHttpRequestParams?: any): Observable<Array<MeetingDto>>;
 
     /**
      * 
@@ -64,6 +65,6 @@ export interface MeetingServiceInterface {
      * @param from 
      * @param to 
      */
-    meetingsControllerFindBetween(from: string, to: string, extraHttpRequestParams?: any): Observable<{}>;
+    meetingsControllerFindBetween(from: string, to: string, extraHttpRequestParams?: any): Observable<Array<MeetingDto>>;
 
 }

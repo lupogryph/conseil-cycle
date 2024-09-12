@@ -44,11 +44,9 @@ export class LoginComponent {
       const auth: Auth = <Auth>this.form.value;
       this.authService.authControllerConnecter(auth).subscribe({
         next: (token) => {
-          console.log('token', token);
           this.router.navigate(['']);
         },
         error: (error) => {
-          console.log('error', error);
           this._snackBar.open('Echec de la connection', 'Fermer', {
             duration: 3000,
           });

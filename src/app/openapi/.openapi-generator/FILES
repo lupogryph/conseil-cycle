@@ -17,7 +17,9 @@ index.ts
 model/auth.ts
 model/create-meeting-dto.ts
 model/create-user-dto.ts
+model/meeting-dto.ts
 model/models.ts
 model/update-user-dto.ts
+model/user-dto.ts
 param.ts
 variables.ts
