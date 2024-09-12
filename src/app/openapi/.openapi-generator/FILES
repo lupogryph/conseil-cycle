@@ -19,6 +19,7 @@ model/create-meeting-dto.ts
 model/create-user-dto.ts
 model/meeting-dto.ts
 model/models.ts
+model/token-dto.ts
 model/update-user-dto.ts
 model/user-dto.ts
 param.ts

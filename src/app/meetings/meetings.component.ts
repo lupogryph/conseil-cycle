@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MeetingDto, MeetingService } from '../openapi';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -16,6 +16,11 @@ export class MeetingsComponent {
   constructor(private meetingService: MeetingService) {}
 
   ngOnInit() {
-    this.meetings$ = this.meetingService.meetingsControllerFindAll();
+    console.log(this.meetingService.configuration);
+    this.meetings$ = this.meetingService.meetingsControllerFindAll().pipe(
+      tap((o) => {
+        console.log(o);
+      })
+    );
   }
 }

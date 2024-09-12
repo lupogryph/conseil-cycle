@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthApiService } from './auth.api.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService, Configuration } from './openapi';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +14,21 @@ import { AuthApiService } from './auth.api.service';
 export class AppComponent {
   title = 'conseil-de-cycle';
 
-  constructor(private router: Router, private authApiService: AuthApiService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private authApiService: AuthApiService
+  ) {}
 
   ngOnInit() {
-    if (!this.authApiService.tokenExists()) {
+    const token = this.authApiService.getAccessToken();
+
+    if (!token) {
       this.router.navigate(['enter']);
     } else {
-      this.authApiService.profile().subscribe({
+      this.auth.authControllerGetProfile().subscribe({
         error: (error) => {
-          this.authApiService.deleteToken();
+          this.authApiService.removeAccessToken();
           this.router.navigate(['enter']);
         },
       });

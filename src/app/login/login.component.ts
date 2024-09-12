@@ -11,7 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Auth, AuthService } from '../openapi';
+import { Auth, AuthService, Configuration } from '../openapi';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthApiService } from '../auth.api.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +38,8 @@ export class LoginComponent {
   constructor(
     private _snackBar: MatSnackBar,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private authApiService: AuthApiService
   ) {}
 
   connecter() {
@@ -44,6 +47,8 @@ export class LoginComponent {
       const auth: Auth = <Auth>this.form.value;
       this.authService.authControllerConnecter(auth).subscribe({
         next: (token) => {
+          //this.authService.configuration.credentials = { Bearer: token.access_token };
+          this.authApiService.setAccessToken(token.access_token);
           this.router.navigate(['']);
         },
         error: (error) => {

@@ -5,7 +5,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { environment } from '../environments/environment';
-import { BASE_PATH } from './openapi/variables';
+import { AuthApiService } from './auth.api.service';
+import { Configuration } from './openapi/configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,15 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
-    { provide: BASE_PATH, useValue: environment.apiUrl },
+    {
+      provide: Configuration,
+      useFactory: (authService: AuthApiService) =>
+        new Configuration({
+          basePath: environment.apiUrl,
+          credentials: { bearer: authService.getAccessToken.bind(authService) },
+        }),
+      deps: [AuthApiService],
+      multi: false,
+    },
   ],
 };

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { Auth } from '../model/models';
+import { TokenDto } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -28,7 +29,7 @@ export interface AuthServiceInterface {
      * 
      * @param auth 
      */
-    authControllerConnecter(auth: Auth, extraHttpRequestParams?: any): Observable<{}>;
+    authControllerConnecter(auth: Auth, extraHttpRequestParams?: any): Observable<TokenDto>;
 
     /**
      * 
