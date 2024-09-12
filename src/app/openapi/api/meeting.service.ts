@@ -465,15 +465,15 @@ export class MeetingService implements MeetingServiceInterface {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public meetingsControllerFindAllAfterDate(from: string, to: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public meetingsControllerFindAllAfterDate(from: string, to: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public meetingsControllerFindAllAfterDate(from: string, to: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public meetingsControllerFindAllAfterDate(from: string, to: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public meetingsControllerFindBetween(from: string, to: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public meetingsControllerFindBetween(from: string, to: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public meetingsControllerFindBetween(from: string, to: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public meetingsControllerFindBetween(from: string, to: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (from === null || from === undefined) {
-            throw new Error('Required parameter from was null or undefined when calling meetingsControllerFindAllAfterDate.');
+            throw new Error('Required parameter from was null or undefined when calling meetingsControllerFindBetween.');
         }
         if (to === null || to === undefined) {
-            throw new Error('Required parameter to was null or undefined when calling meetingsControllerFindAllAfterDate.');
+            throw new Error('Required parameter to was null or undefined when calling meetingsControllerFindBetween.');
         }
 
         let localVarHeaders = this.defaultHeaders;

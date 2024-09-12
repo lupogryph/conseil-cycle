@@ -4,6 +4,8 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { environment } from '../environments/environment';
+import { Configuration } from './openapi/configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,5 +13,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
+    {
+      provide: Configuration,
+      useFactory: () =>
+        new Configuration({
+          basePath: environment.apiUrl,
+        }),
+      deps: [],
+      multi: true,
+    },
   ],
 };

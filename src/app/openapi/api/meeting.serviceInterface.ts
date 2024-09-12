@@ -64,6 +64,6 @@ export interface MeetingServiceInterface {
      * @param from 
      * @param to 
      */
-    meetingsControllerFindAllAfterDate(from: string, to: string, extraHttpRequestParams?: any): Observable<{}>;
+    meetingsControllerFindBetween(from: string, to: string, extraHttpRequestParams?: any): Observable<{}>;
 
 }

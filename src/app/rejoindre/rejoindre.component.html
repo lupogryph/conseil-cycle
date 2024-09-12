@@ -2,22 +2,36 @@
 
 <form [formGroup]="form" (submit)="rejoindre()">
 <mat-form-field>
-  <mat-label>Pseudo</mat-label>
-  <input matInput formControlName="pseudo">
-  <mat-icon matSuffix>person</mat-icon>
+  <mat-label>Email</mat-label>
+  <input matInput formControlName="email">
+  <mat-icon matSuffix>email</mat-icon>
+  @if (form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')) {
+    <mat-error>Adresse email non valide</mat-error>
+  }
 </mat-form-field>
 <mat-form-field>
   <mat-label>Prénom</mat-label>
-  <input matInput formControlName="prenom">
+  <input matInput formControlName="firstName">
+  @if (form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')) {
+    <mat-error>Adresse email non valide</mat-error>
+  }
 </mat-form-field>
 <mat-form-field>
   <mat-label>Nom</mat-label>
-  <input matInput formControlName="nom">
+  <input matInput formControlName="name">
 </mat-form-field>
 <mat-form-field>
-  <mat-label>PIN</mat-label>
-  <input matInput type="password" formControlName="pin">
+  <mat-label>Mot de passe</mat-label>
+  <input matInput type="password" formControlName="password">
   <mat-icon matSuffix>key</mat-icon>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Confirmer le mot de passe</mat-label>
+  <input matInput type="password" formControlName="rePassword">
+  <mat-icon matSuffix>key</mat-icon>
+  @if (form.get('rePassword')?.hasError('different') && !form.get('rePassword')?.hasError('required')) {
+    <mat-error>Mot de passe non identique</mat-error>
+  }
 </mat-form-field>
 
 <button mat-flat-button [disabled]="!this.form.valid">Rejoindre</button>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthApiService } from './auth.api.service';
 
 @Component({
@@ -11,9 +10,9 @@ import { AuthApiService } from './auth.api.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'defi-photo';
+  title = 'conseil-de-cycle';
 
-  constructor(private authApiService: AuthApiService, private router: Router) {}
+  constructor(private router: Router, private authApiService: AuthApiService) {}
 
   ngOnInit() {
     if (!this.authApiService.tokenExists()) {

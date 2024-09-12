@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "defi-photo": {
+    "conseil-de-cycle": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/defi-photo",
+            "outputPath": "dist/conseil-de-cycle",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "defi-photo:build:production"
+              "buildTarget": "conseil-de-cycle:build:production"
             },
             "development": {
-              "buildTarget": "defi-photo:build:development"
+              "buildTarget": "conseil-de-cycle:build:development"
             }
           },
           "defaultConfiguration": "development"

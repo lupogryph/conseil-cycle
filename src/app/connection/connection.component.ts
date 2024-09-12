@@ -10,8 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { AuthApiService } from '../auth.api.service';
 import { Router } from '@angular/router';
+import { Auth, AuthService } from '../openapi';
 
 @Component({
   selector: 'app-connection',
@@ -29,24 +29,26 @@ import { Router } from '@angular/router';
 })
 export class ConnectionComponent {
   form: FormGroup = new FormGroup({
-    pseudo: new FormControl('', [Validators.required]),
-    pin: new FormControl('', [
-      Validators.required,
-      Validators.pattern('[0-9]+'),
-    ]),
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   constructor(
     private _snackBar: MatSnackBar,
-    private authApiService: AuthApiService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   connecter() {
     if (this.form.valid) {
-      this.authApiService.connecter(this.form.value).subscribe({
-        next: (token) => this.router.navigate(['defi']),
+      const auth: Auth = <Auth>this.form.value;
+      this.authService.authControllerConnecter(auth).subscribe({
+        next: (token) => {
+          console.log('token', token);
+          this.router.navigate(['']);
+        },
         error: (error) => {
+          console.log('error', error);
           this._snackBar.open('Echec de la connection', 'Fermer', {
             duration: 3000,
           });
