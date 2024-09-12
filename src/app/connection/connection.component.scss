@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  height: 100%;
+  padding: 0 3rem;
+  .icon {
+    mat-icon {
+      font-size: 5rem;
+      height: 5rem;
+      width: 5rem;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+  }
+}

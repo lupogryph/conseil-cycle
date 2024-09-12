@@ -1,0 +1,24 @@
+<div class="icon"><mat-icon>person_add</mat-icon></div>
+
+<form [formGroup]="form" (submit)="rejoindre()">
+<mat-form-field>
+  <mat-label>Pseudo</mat-label>
+  <input matInput formControlName="pseudo">
+  <mat-icon matSuffix>person</mat-icon>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Prénom</mat-label>
+  <input matInput formControlName="prenom">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Nom</mat-label>
+  <input matInput formControlName="nom">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>PIN</mat-label>
+  <input matInput type="password" formControlName="pin">
+  <mat-icon matSuffix>key</mat-icon>
+</mat-form-field>
+
+<button mat-flat-button [disabled]="!this.form.valid">Rejoindre</button>
+</form>
