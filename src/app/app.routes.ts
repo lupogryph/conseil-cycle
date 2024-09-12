@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { RejoindreComponent } from './rejoindre/rejoindre.component';
-import { ConnectionComponent } from './connection/connection.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 import { EnterComponent } from './enter/enter.component';
 
 export const routes: Routes = [
   { path: 'enter', component: EnterComponent },
-  { path: 'rejoindre', component: RejoindreComponent },
-  { path: 'connection', component: ConnectionComponent },
-  { path: '', redirectTo: 'defi', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];

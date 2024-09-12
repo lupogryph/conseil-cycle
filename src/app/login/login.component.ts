@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { Auth, AuthService } from '../openapi';
 
 @Component({
-  selector: 'app-connection',
+  selector: 'app-login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -24,10 +24,10 @@ import { Auth, AuthService } from '../openapi';
     MatIconModule,
     MatSnackBarModule,
   ],
-  templateUrl: './connection.component.html',
-  styleUrl: './connection.component.scss',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class ConnectionComponent {
+export class LoginComponent {
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),

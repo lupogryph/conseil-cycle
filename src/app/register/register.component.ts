@@ -3,8 +3,6 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +15,7 @@ import { CreateUserDto, UserService } from '../openapi';
 import { rePasswordValidator } from '../repassword.directive';
 
 @Component({
-  selector: 'app-rejoindre',
+  selector: 'app-register',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -27,10 +25,10 @@ import { rePasswordValidator } from '../repassword.directive';
     ReactiveFormsModule,
     MatSnackBarModule,
   ],
-  templateUrl: './rejoindre.component.html',
-  styleUrl: './rejoindre.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
-export class RejoindreComponent {
+export class RegisterComponent {
   form: FormGroup = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
