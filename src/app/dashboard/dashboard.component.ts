@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { MeetingDto, MeetingService } from '../openapi';
 import { MatButtonModule } from '@angular/material/button';
-import { NewMeetingComponent } from "../new-meeting/new-meeting.component";
+import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [TopbarComponent, MeetingsComponent, NewMeetingComponent, MatIconModule, MatButtonModule, NewMeetingComponent],
+  imports: [TopbarComponent, MeetingsComponent, MeetingFormComponent, MatIconModule, MatButtonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
