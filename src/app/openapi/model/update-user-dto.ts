@@ -11,11 +11,11 @@
 
 
 export interface UpdateUserDto { 
-    email: string;
-    password: string;
-    firstName: string;
-    name: string;
-    role: UpdateUserDto.RoleEnum;
+    email?: string;
+    password?: string;
+    firstName?: string;
+    name?: string;
+    role?: UpdateUserDto.RoleEnum;
 }
 export namespace UpdateUserDto {
     export type RoleEnum = 'user' | 'admin';

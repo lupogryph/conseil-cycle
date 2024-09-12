@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MeetingDto } from '../openapi';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -16,6 +16,13 @@ export class MeetingsComponent {
   @Input()
   meetings!: MeetingDto[];
 
+  @Output()
+  edit = new EventEmitter<number>();
+
   constructor() {}
+
+  editer(i: number) {
+    this.edit.emit(i);
+  }
 
 }

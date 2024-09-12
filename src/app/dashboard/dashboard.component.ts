@@ -3,7 +3,7 @@ import { TopbarComponent } from "../topbar/topbar.component";
 import { MeetingsComponent } from "../meetings/meetings.component";
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
-import { MeetingDto, MeetingService } from '../openapi';
+import { CreateMeetingDto, MeetingDto, MeetingService } from '../openapi';
 import { MatButtonModule } from '@angular/material/button';
 import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
 
@@ -17,33 +17,54 @@ import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
 export class DashboardComponent {
   meetings: MeetingDto[] = [];
 
+  mode: 'add' | 'edit' | 'calendar' = 'calendar';
+  cursor: number = -1;
+
+  _meeting!: MeetingDto;
+
   constructor(private meetingService: MeetingService) {}
 
   ngOnInit() {
     this.meetingService.meetingsControllerFindAll().subscribe({
       next: (meetings) => {
-        this.meetings = meetings;
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i < 24; i++) {
+          console.log(i);
+          const date = new Date();
+          date.setDate(date.getDate() + i);
+          date.setHours(i);
           this.meetings.push({
             id: i,
-            date: new Date().toLocaleDateString(),
+            date: date.toISOString(),
             location: 'ICI',
-            createdBy: {
-              email: '',
-              firstName: '',
-              name: '',
-              role: 'user'
-            },
-            updatedBy: {
-              email: '',
-              firstName: '',
-              name: '',
-              role: 'user'
-            }
           });
         }
        }
     });
+  }
+
+  edit(i: number) {
+    this.mode = 'edit';
+    this._meeting = this.meetings[i];
+  }
+
+  add() {
+    this.mode = 'add';
+    this._meeting = {};
+  }
+
+  save(meeting: MeetingDto) {
+    switch (this.mode) {
+      case 'add':
+        this.meetingService.meetingControllerCreate(<CreateMeetingDto>meeting);
+        break;
+      case 'edit':
+        if (meeting.id) {
+          this.meetingService.meetingControllerUpdate(meeting.id, meeting);
+        }
+        break;
+      default:
+        break;
+    }
   }
 
 }

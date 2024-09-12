@@ -12,10 +12,10 @@ import { UserDto } from './user-dto';
 
 
 export interface MeetingDto { 
-    id: number;
-    date: string;
-    location: string;
-    createdBy: UserDto;
-    updatedBy: UserDto;
+    id?: number;
+    date?: string;
+    location?: string;
+    createdBy?: UserDto;
+    updatedBy?: UserDto;
 }
 

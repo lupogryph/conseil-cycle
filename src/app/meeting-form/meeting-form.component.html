@@ -1,1 +1,24 @@
-<p>meeting-form works!</p>
+<div class="big-icon"><mat-icon>edit_calendar</mat-icon></div>
+
+<form [formGroup]="form" (submit)="save()">
+<mat-form-field>
+  <mat-label>Date</mat-label>
+  <input matInput [matDatepicker]="picker" formControlName="date"/>
+  <mat-hint>JJ/MM/AAAA</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Heure</mat-label>
+  <input matInput type="time" placeholder="Heure" formControlName="time">
+  <mat-icon matSuffix>schedule</mat-icon>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Où ?</mat-label>
+  <input matInput formControlName="location">
+</mat-form-field>
+
+<!-- <p>{{form.value | json}}</p> -->
+
+<button mat-flat-button [disabled]="!this.form.valid">Sauvegarder</button>
+</form>
