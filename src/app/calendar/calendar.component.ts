@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { MeetingDto } from '../openapi';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DatePipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 interface Calendar {
   day: number;
@@ -12,7 +14,7 @@ interface Calendar {
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [MatGridListModule, DatePipe],
+  imports: [MatGridListModule, DatePipe, MatIconModule, MatButtonModule],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
@@ -35,6 +37,10 @@ export class CalendarComponent {
   constructor() {}
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     console.log(this.year, this.month);
     let current = new Date();
     this.month ??= current.getMonth();
@@ -58,5 +64,25 @@ export class CalendarComponent {
             )
         : false
     );
+  }
+
+  nextMonth() {
+    if (this.month < 11) {
+      this.month++;
+    } else {
+      this.month = 0;
+      this.year++;
+    }
+    this.init();
+  }
+
+  previousMonth() {
+    if (this.month > 0) {
+      this.month--;
+    } else {
+      this.month = 12;
+      this.year--;
+    }
+    this.init();
   }
 }

@@ -1,25 +1,30 @@
-<mat-grid-list cols="7" rowHeight="2:1">
-  <mat-grid-tile>Lundi</mat-grid-tile>
-  <mat-grid-tile>Mardi</mat-grid-tile>
-  <mat-grid-tile>Mercredi</mat-grid-tile>
-  <mat-grid-tile>Jeudi</mat-grid-tile>
-  <mat-grid-tile>Vendredi</mat-grid-tile>
-  <mat-grid-tile>Samedi</mat-grid-tile>
-  <mat-grid-tile>Dimanche</mat-grid-tile>
-  @for (emptyItem of [].constructor(empty); track emptyIdx; let emptyIdx = $index) {
-    <mat-grid-tile></mat-grid-tile>
-  }
-  @for (calendarItem of [].constructor(maxDay); track calendarIdx; let  calendarIdx = $index) {
-    <mat-grid-tile>
-      <div class="tile">
-        <div class="day">{{calendarIdx + 1}}</div>
-        @for (eventItem of getMeetings(calendarIdx + 1); track eventItem.id; let eventIdx = $index) {
-          <div class="event">
-            {{eventItem.date | date : 'HH:mm'}} {{eventItem.location}}
-          </div>
-        }
-      </div>
-    </mat-grid-tile>
-  }
+<div class="top">
+  <button mat-icon-button (click)="previousMonth()"><mat-icon>chevron_left</mat-icon></button>
+  <span class="fixed">{{(year+'/'+month+'/1') | date : 'LLLL yyyy' }}</span>
+  <button mat-icon-button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
+</div>
 
+<mat-grid-list cols="7" rowHeight="3:1">
+  @for (dayItem of ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']; track dayItem; let dayIdx = $index) {
+    <mat-grid-tile>{{dayItem}}</mat-grid-tile>
+  }
 </mat-grid-list>
+<div class="tiles hide-scroll">
+  <mat-grid-list cols="7" rowHeight="1.7:1">
+    @for (emptyItem of [].constructor(empty); track emptyIdx; let emptyIdx = $index) {
+      <mat-grid-tile></mat-grid-tile>
+    }
+    @for (calendarItem of [].constructor(maxDay); track calendarIdx; let  calendarIdx = $index) {
+      <mat-grid-tile>
+        <div class="tile">
+          <div class="day">{{calendarIdx + 1}}</div>
+          @for (eventItem of getMeetings(calendarIdx + 1); track eventItem.id; let eventIdx = $index) {
+            <div class="event">
+              {{eventItem.date | date : 'HH:mm'}} {{eventItem.location}}
+            </div>
+          }
+        </div>
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
+</div>

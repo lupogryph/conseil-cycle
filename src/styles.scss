@@ -11,6 +11,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scroll {
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
