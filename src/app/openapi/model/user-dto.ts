@@ -11,10 +11,10 @@
 
 
 export interface UserDto { 
-    email: string;
-    firstName: string;
-    name: string;
-    role: UserDto.RoleEnum;
+    email?: string;
+    firstName?: string;
+    name?: string;
+    role?: UserDto.RoleEnum;
 }
 export namespace UserDto {
     export type RoleEnum = 'user' | 'admin';

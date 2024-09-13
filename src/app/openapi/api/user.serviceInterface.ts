@@ -14,6 +14,7 @@ import { Observable }                                        from 'rxjs';
 
 import { CreateUserDto } from '../model/models';
 import { UpdateUserDto } from '../model/models';
+import { UserDto } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -29,13 +30,13 @@ export interface UserServiceInterface {
      * 
      * @param createUserDto 
      */
-    userControllerCreate(createUserDto: CreateUserDto, extraHttpRequestParams?: any): Observable<{}>;
+    userControllerCreate(createUserDto: CreateUserDto, extraHttpRequestParams?: any): Observable<UserDto>;
 
     /**
      * 
      * 
      */
-    userControllerFind(extraHttpRequestParams?: any): Observable<{}>;
+    userControllerFind(extraHttpRequestParams?: any): Observable<UserDto>;
 
     /**
      * 

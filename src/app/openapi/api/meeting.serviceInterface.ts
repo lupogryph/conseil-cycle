@@ -29,14 +29,14 @@ export interface MeetingServiceInterface {
      * 
      * @param createMeetingDto 
      */
-    meetingControllerCreate(createMeetingDto: CreateMeetingDto, extraHttpRequestParams?: any): Observable<{}>;
+    meetingControllerCreate(createMeetingDto: CreateMeetingDto, extraHttpRequestParams?: any): Observable<MeetingDto>;
 
     /**
      * 
      * 
      * @param id 
      */
-    meetingControllerFindOne(id: number, extraHttpRequestParams?: any): Observable<{}>;
+    meetingControllerFindOne(id: number, extraHttpRequestParams?: any): Observable<MeetingDto>;
 
     /**
      * 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthApiService } from './auth.api.service';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthService, Configuration } from './openapi';
+import { AuthService, Configuration, UserService } from './openapi';
 
 @Component({
   selector: 'app-root',

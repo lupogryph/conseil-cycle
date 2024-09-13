@@ -58,15 +58,9 @@ export class RegisterComponent {
     private apiService: UserService
   ) {}
 
-  logForm() {
-    console.log(this.form);
-  }
-
   rejoindre() {
-    console.log(this.form.valid);
     if (this.form.valid) {
       const user: CreateUserDto = <CreateUserDto>this.form.value;
-      console.log(user);
       this.apiService.userControllerCreate(user).subscribe({
         next: (user) => this.router.navigate(['connection']),
         error: (error) =>

@@ -14,6 +14,7 @@ import { Observable }                                        from 'rxjs';
 
 import { CreateUserDto } from '../model/models';
 import { UpdateUserDto } from '../model/models';
+import { UserDto } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -29,20 +30,20 @@ export interface AdminServiceInterface {
      * 
      * @param createUserDto 
      */
-    userAdminControllerCreate(createUserDto: CreateUserDto, extraHttpRequestParams?: any): Observable<{}>;
+    userAdminControllerCreate(createUserDto: CreateUserDto, extraHttpRequestParams?: any): Observable<UserDto>;
 
     /**
      * 
      * 
      */
-    userAdminControllerFindAll(extraHttpRequestParams?: any): Observable<{}>;
+    userAdminControllerFindAll(extraHttpRequestParams?: any): Observable<Array<UserDto>>;
 
     /**
      * 
      * 
      * @param id 
      */
-    userAdminControllerFindOne(id: number, extraHttpRequestParams?: any): Observable<{}>;
+    userAdminControllerFindOne(id: number, extraHttpRequestParams?: any): Observable<UserDto>;
 
     /**
      * 

@@ -37,8 +37,8 @@ import { JsonPipe } from '@angular/common';
 export class MeetingFormComponent {
   @Input()
   set meeting(meeting: MeetingDto) {
+    this._meeting = meeting;
     if (meeting && meeting.date) {
-      this._meeting = meeting;
       let date = new Date(meeting.date);
       this.form.reset({
         date: date,
@@ -51,23 +51,25 @@ export class MeetingFormComponent {
   }
   _meeting!: MeetingDto;
 
-  date = model<Date | null>(null);
-
   @Output()
   saved = new EventEmitter<MeetingDto>();
 
   form: FormGroup = new FormGroup({
     date: new FormControl('', [Validators.required]),
-    time: new FormControl('', [Validators.required]),
+    time: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[0-9]{2}:[0-9]{2}'),
+    ]),
     location: new FormControl('', [Validators.required]),
   });
 
   save() {
     if (this.form.valid) {
-      this._meeting.date = this.getDateFromStrings(
-        this.form.value.date,
-        this.form.value.time
-      ).toISOString();
+      let d = this.form.value.date;
+      let t = this.form.value.time.split(':');
+      d.setHours(+t[0]);
+      d.setMinutes(+t[1]);
+      this._meeting.date = d.toISOString();
       this._meeting.location = this.form.value.location;
       this.saved.emit(this._meeting);
     }
@@ -77,13 +79,5 @@ export class MeetingFormComponent {
     let h = String(date.getHours()).padStart(2, '0');
     let m = String(date.getMinutes()).padStart(2, '0');
     return `${h}:${m}`;
-  }
-
-  getDateFromStrings(date: string, time: string) {
-    let d = new Date(date);
-    let t = time.split(':');
-    d.setHours(+t[0]);
-    d.setMinutes(+t[1]);
-    return d;
   }
 }

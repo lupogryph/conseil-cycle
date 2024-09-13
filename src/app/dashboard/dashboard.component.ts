@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TopbarComponent } from "../topbar/topbar.component";
-import { MeetingsComponent } from "../meetings/meetings.component";
+import { TopbarComponent } from '../topbar/topbar.component';
+import { MeetingsComponent } from '../meetings/meetings.component';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { CreateMeetingDto, MeetingDto, MeetingService } from '../openapi';
@@ -10,9 +10,15 @@ import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [TopbarComponent, MeetingsComponent, MeetingFormComponent, MatIconModule, MatButtonModule],
+  imports: [
+    TopbarComponent,
+    MeetingsComponent,
+    MeetingFormComponent,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   meetings: MeetingDto[] = [];
@@ -20,46 +26,49 @@ export class DashboardComponent {
   mode: 'add' | 'edit' | 'calendar' = 'calendar';
   cursor: number = -1;
 
-  _meeting!: MeetingDto;
+  _meeting?: MeetingDto;
 
   constructor(private meetingService: MeetingService) {}
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     this.meetingService.meetingsControllerFindAll().subscribe({
-      next: (meetings) => {
-        for (let i = 1; i < 24; i++) {
-          console.log(i);
-          const date = new Date();
-          date.setDate(date.getDate() + i);
-          date.setHours(i);
-          this.meetings.push({
-            id: i,
-            date: date.toISOString(),
-            location: 'ICI',
-          });
-        }
-       }
+      next: (meetings) => (this.meetings = meetings),
+      error: (error) => console.log('error', error),
     });
   }
 
   edit(i: number) {
+    this._meeting = structuredClone(this.meetings[i]);
     this.mode = 'edit';
-    this._meeting = this.meetings[i];
   }
 
   add() {
-    this.mode = 'add';
     this._meeting = {};
+    this.mode = 'add';
   }
 
   save(meeting: MeetingDto) {
     switch (this.mode) {
       case 'add':
-        this.meetingService.meetingControllerCreate(<CreateMeetingDto>meeting);
+        this.meetingService
+          .meetingControllerCreate(<CreateMeetingDto>meeting)
+          .subscribe({
+            next: (data) => this.reset(),
+            error: (error) => console.log('error', error),
+          });
         break;
       case 'edit':
         if (meeting.id) {
-          this.meetingService.meetingControllerUpdate(meeting.id, meeting);
+          this.meetingService
+            .meetingControllerUpdate(meeting.id, meeting)
+            .subscribe({
+              next: (data) => this.reset(),
+              error: (error) => console.log('error', error),
+            });
         }
         break;
       default:
@@ -67,4 +76,8 @@ export class DashboardComponent {
     }
   }
 
+  reset() {
+    delete this._meeting;
+    this.init();
+  }
 }
