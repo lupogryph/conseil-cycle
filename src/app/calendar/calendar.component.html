@@ -18,9 +18,18 @@
       <mat-grid-tile>
         <div class="tile">
           <div class="day">{{calendarIdx + 1}}</div>
-          @for (eventItem of getMeetings(calendarIdx + 1); track eventItem.id; let eventIdx = $index) {
-            <div class="event">
-              {{eventItem.date | date : 'HH:mm'}} {{eventItem.location}}
+          @if (getMeetings(calendarIdx + 1).length < 2) {
+            @for (eventItem of getMeetings(calendarIdx + 1); track eventItem.id; let eventIdx = $index) {
+              <div class="event" matRipple (click)="_edit()">
+                {{eventItem.date | date : 'HH:mm'}} {{eventItem.location}}
+              </div>
+            }
+          }
+          @else {
+            <div class="circles">
+              @for (eventItem of getMeetings(calendarIdx + 1); track eventItem.id; let eventIdx = $index) {
+                <span class="circle" matRipple (click)="_edit()"></span>
+              }
             </div>
           }
         </div>

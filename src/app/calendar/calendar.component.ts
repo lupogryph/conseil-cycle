@@ -4,6 +4,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
 
 interface Calendar {
   day: number;
@@ -14,7 +15,13 @@ interface Calendar {
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [MatGridListModule, DatePipe, MatIconModule, MatButtonModule],
+  imports: [
+    MatGridListModule,
+    DatePipe,
+    MatIconModule,
+    MatButtonModule,
+    MatRippleModule,
+  ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
@@ -85,4 +92,8 @@ export class CalendarComponent {
     }
     this.init();
   }
+
+  _add() {}
+
+  _edit() {}
 }

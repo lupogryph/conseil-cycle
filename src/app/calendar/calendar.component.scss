@@ -19,6 +19,13 @@
   height: 100%;
   width: 100%;
   padding: 5px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  &:hover {
+    background-color: rgba($color: #00ccff, $alpha: 0.2);
+  }
 }
 .day {
   margin-bottom: 5px;
@@ -28,4 +35,26 @@
   color: white;
   border-radius: 9px;
   padding: 5px;
+  z-index: 10;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(1, 170, 170);
+  }
+}
+.circles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 15px;
+  .circle {
+    background-color: darkcyan;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(1, 170, 170);
+    }
+  }
 }
