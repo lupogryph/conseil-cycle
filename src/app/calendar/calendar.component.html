@@ -1,6 +1,6 @@
 <div class="top">
   <button mat-icon-button (click)="previousMonth()"><mat-icon>chevron_left</mat-icon></button>
-  <span class="fixed">{{(year+'/'+month+'/1') | date : 'LLLL yyyy' }}</span>
+  <span class="fixed">{{(year+'/'+(month + 1)+'/1') | date : 'LLLL yyyy' }}</span>
   <button mat-icon-button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
