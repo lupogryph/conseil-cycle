@@ -48,11 +48,15 @@ export class CalendarComponent {
 
   getMeetings(day: number): MeetingDto[] {
     return this.meetings.filter((m) =>
-      m.date?.startsWith(
-        `${new DatePipe('fr-FR').transform(this.date, 'yyyy-MM')}-${String(
-          day
-        ).padStart(2, '0')}`
-      )
+      m.date
+        ? new Date(m.date)
+            .toLocaleDateString()
+            .startsWith(
+              `${String(day).padStart(2, '0')}/${new DatePipe(
+                'fr-FR'
+              ).transform(this.date, 'MM/yyyy')}`
+            )
+        : false
     );
   }
 }
