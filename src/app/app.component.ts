@@ -3,11 +3,14 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AuthApiService } from './auth.api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService, Configuration, UserService } from './openapi';
+import { TopbarComponent } from './topbar/topbar.component';
+import { userSignal } from '../main';
+import { CurrentUserService } from './current-user.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TopbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -17,7 +20,8 @@ export class AppComponent {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private authApiService: AuthApiService
+    private authApiService: AuthApiService,
+    private currentUserService: CurrentUserService,
   ) {}
 
   ngOnInit() {
@@ -27,6 +31,7 @@ export class AppComponent {
       this.router.navigate(['enter']);
     } else {
       this.auth.authControllerGetProfile().subscribe({
+        next: () => this.currentUserService.setUser(),
         error: (error) => {
           this.authApiService.removeAccessToken();
           this.router.navigate(['enter']);

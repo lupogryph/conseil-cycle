@@ -13,13 +13,27 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, MatDateFormats, provideNativeDateAdapter } from '@angular/material/core';
+import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import { JsonPipe } from '@angular/common';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @Component({
   selector: 'app-meeting-form',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    provideMomentDateAdapter(MY_FORMATS),
+  ],
   imports: [
     MatFormFieldModule,
     MatInputModule,

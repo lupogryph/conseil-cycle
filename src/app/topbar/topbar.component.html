@@ -1,8 +1,20 @@
 <mat-toolbar>
   <span>Conseils de cycle</span>
   <span class="spacer"></span>
-  <span>{{(user$ | async)?.firstName}} {{(user$ | async)?.name}}</span>
-  <button mat-icon-button class="" aria-label="">
-    <mat-icon>person</mat-icon>
-  </button>
+  @if (user()) {
+    <span>{{user()?.firstName}} {{user()?.name}}</span>
+    <button mat-icon-button class="" aria-label="" [matMenuTriggerFor]="userMenu">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>Profil</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Déconnection</span>
+      </button>
+    </mat-menu>
+  }
 </mat-toolbar>

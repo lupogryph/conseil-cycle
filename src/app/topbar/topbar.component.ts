@@ -5,20 +5,31 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserDto, UserService } from '../openapi';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
+import { userSignal } from '../../main';
+import { CurrentUserService } from '../current-user.service';
+import { AuthApiService } from '../auth.api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, CommonModule],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, CommonModule],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
 })
 export class TopbarComponent {
-  user$?: Observable<UserDto>;
+  user = userSignal;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private currentUserService: CurrentUserService,
+    private authApiService: AuthApiService,
+    private router: Router,
+  ) {}
 
-  ngOnInit() {
-    this.user$ = this.userService.userControllerFind();
+  logout() {
+    this.authApiService.removeAccessToken();
+    this.currentUserService.removeUser();
+    this.router.navigate(['enter']);
   }
 }

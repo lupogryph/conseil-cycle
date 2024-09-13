@@ -11,8 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Auth, AuthService, Configuration } from '../openapi';
+import { Auth, AuthService, Configuration, UserService } from '../openapi';
 import { AuthApiService } from '../auth.api.service';
+import { CurrentUserService } from '../current-user.service';
+import { userSignal } from '../../main';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +31,8 @@ import { AuthApiService } from '../auth.api.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  userSignal = userSignal;
+
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -38,7 +42,8 @@ export class LoginComponent {
     private _snackBar: MatSnackBar,
     private router: Router,
     private authService: AuthService,
-    private authApiService: AuthApiService
+    private authApiService: AuthApiService,
+    private currentUserService: CurrentUserService,
   ) {}
 
   connecter() {
@@ -48,6 +53,7 @@ export class LoginComponent {
         next: (token) => {
           //this.authService.configuration.credentials = { Bearer: token.access_token };
           this.authApiService.setAccessToken(token.access_token);
+          this.currentUserService.setUser();
           this.router.navigate(['']);
         },
         error: (error) => {
