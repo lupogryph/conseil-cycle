@@ -2,19 +2,17 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { UserDto, UserService } from '../openapi';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { userSignal } from '../../main';
 import { CurrentUserService } from '../current-user.service';
 import { AuthApiService } from '../auth.api.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, CommonModule],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, CommonModule, RouterModule],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
 })
