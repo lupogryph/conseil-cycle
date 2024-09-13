@@ -20,22 +20,39 @@ export class CalendarComponent {
   @Input()
   meetings!: MeetingDto[];
 
-  calendar: Calendar[] = [];
+  @Input()
+  month!: number;
 
-  constructor() {
-    for (let i = 1; i <= 31; i++) {
-      this.calendar.push({
-        day: i,
-        month: 11,
-        events: [],
-      });
-    }
-    this.calendar[10].events = [
-      {
-        id: 1,
-        date: '2024-11-11T11:11:00.000Z',
-        location: 'Chatenois',
-      },
-    ];
+  @Input()
+  year!: number;
+
+  date!: Date;
+
+  empty: number = 0;
+
+  maxDay: number = 31;
+
+  constructor() {}
+
+  ngOnInit() {
+    console.log(this.year, this.month);
+    let current = new Date();
+    this.month ??= current.getMonth();
+    this.year ??= current.getFullYear();
+    this.date = new Date(this.year, this.month, 1);
+    let p = Number(new DatePipe('fr-FR').transform(this.date, 'c'));
+    this.empty = p == 0 ? 6 : --p;
+
+    this.maxDay = new Date(this.year, this.month + 1, 0).getDate();
+  }
+
+  getMeetings(day: number): MeetingDto[] {
+    return this.meetings.filter((m) =>
+      m.date?.startsWith(
+        `${new DatePipe('fr-FR').transform(this.date, 'yyyy-MM')}-${String(
+          day
+        ).padStart(2, '0')}`
+      )
+    );
   }
 }

@@ -5,7 +5,8 @@
       <mat-card-subtitle>{{meeting.location}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
-      <button mat-icon-button class="edit" (click)="editer(i)"><mat-icon>edit_calendar</mat-icon></button>
+      <button mat-icon-button class="del" (click)="_remove(i)"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button class="edit" (click)="_edit(i)"><mat-icon>edit_calendar</mat-icon></button>
     </mat-card-actions>
   </mat-card>
 }

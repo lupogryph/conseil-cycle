@@ -6,13 +6,16 @@
   <mat-grid-tile>Vendredi</mat-grid-tile>
   <mat-grid-tile>Samedi</mat-grid-tile>
   <mat-grid-tile>Dimanche</mat-grid-tile>
-  @for (cal of calendar; track cal; let  c = $index) {
+  @for (emptyItem of [].constructor(empty); track emptyIdx; let emptyIdx = $index) {
+    <mat-grid-tile></mat-grid-tile>
+  }
+  @for (calendarItem of [].constructor(maxDay); track calendarIdx; let  calendarIdx = $index) {
     <mat-grid-tile>
       <div class="tile">
-        <div class="day">{{cal.day}}</div>
-        @for (evt of cal.events; track evt.id; let  e = $index) {
+        <div class="day">{{calendarIdx + 1}}</div>
+        @for (eventItem of getMeetings(calendarIdx + 1); track eventItem.id; let eventIdx = $index) {
           <div class="event">
-            {{evt.date | date : 'HH:mm'}} {{evt.location}}
+            {{eventItem.date | date : 'HH:mm'}} {{eventItem.location}}
           </div>
         }
       </div>

@@ -78,6 +78,16 @@ export class DashboardComponent {
     }
   }
 
+  remove(i: number) {
+    let id = this.meetings[i].id;
+    if (id) {
+      this.meetingService.meetingControllerRemove(id).subscribe({
+        next: () => this.reset(),
+        error: (error) => console.log('error', error),
+      });
+    }
+  }
+
   reset() {
     delete this._meeting;
     this.init();

@@ -8,7 +8,13 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-meetings',
   standalone: true,
-  imports: [ AsyncPipe, CommonModule, MatCardModule, MatButtonModule, MatIconModule ],
+  imports: [
+    AsyncPipe,
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './meetings.component.html',
   styleUrl: './meetings.component.scss',
 })
@@ -19,10 +25,16 @@ export class MeetingsComponent {
   @Output()
   edit = new EventEmitter<number>();
 
+  @Output()
+  remove = new EventEmitter<number>();
+
   constructor() {}
 
-  editer(i: number) {
+  _edit(i: number) {
     this.edit.emit(i);
   }
 
+  _remove(i: number) {
+    this.remove.emit(i);
+  }
 }

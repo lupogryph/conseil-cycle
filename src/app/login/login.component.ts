@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { Auth, AuthService, Configuration } from '../openapi';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthApiService } from '../auth.api.service';
+import { UserGlobalService } from '../user-global.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,8 @@ export class LoginComponent {
     private _snackBar: MatSnackBar,
     private router: Router,
     private authService: AuthService,
-    private authApiService: AuthApiService
+    private authApiService: AuthApiService,
+    private userGlobalService: UserGlobalService
   ) {}
 
   connecter() {
@@ -49,6 +51,7 @@ export class LoginComponent {
         next: (token) => {
           //this.authService.configuration.credentials = { Bearer: token.access_token };
           this.authApiService.setAccessToken(token.access_token);
+          this.userGlobalService.refreshUser();
           this.router.navigate(['']);
         },
         error: (error) => {

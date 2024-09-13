@@ -1,7 +1,7 @@
 <mat-toolbar>
   <span>Conseils de cycle</span>
   <span class="spacer"></span>
-  <span>{{user?.firstName}} {{user?.name}} </span>
+  <span>{{(user$ | async)?.firstName}} {{(user$ | async)?.name}}</span>
   <button mat-icon-button class="" aria-label="">
     <mat-icon>person</mat-icon>
   </button>

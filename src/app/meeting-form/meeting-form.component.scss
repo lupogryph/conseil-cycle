@@ -6,12 +6,7 @@
 .left {
   display: flex;
   flex-direction: column;
-  .big-icon {
-    align-self: flex-start;
-  }
-  button {
-    align-self: flex-end;
-  }
+  gap: 15px;
 }
 form {
   width: 420px;
