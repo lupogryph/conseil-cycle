@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, model, Output } from '@angular/core';
 import { MeetingDto } from '../openapi';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,7 +32,7 @@ import { JsonPipe } from '@angular/common';
     JsonPipe,
   ],
   templateUrl: './meeting-form.component.html',
-  styleUrl: './meeting-form.component.scss'
+  styleUrl: './meeting-form.component.scss',
 })
 export class MeetingFormComponent {
   @Input()
@@ -40,8 +45,10 @@ export class MeetingFormComponent {
         time: this.getTimeFromDate(date),
         location: meeting.location,
       });
+    } else {
+      this.form.reset();
     }
-  };
+  }
   _meeting!: MeetingDto;
 
   date = model<Date | null>(null);
@@ -49,17 +56,18 @@ export class MeetingFormComponent {
   @Output()
   saved = new EventEmitter<MeetingDto>();
 
-  form: FormGroup = new FormGroup(
-    {
-      date: new FormControl('', [Validators.required]),
-      time: new FormControl('', [Validators.required]),
-      location: new FormControl('', [Validators.required]),
-    }
-  );
+  form: FormGroup = new FormGroup({
+    date: new FormControl('', [Validators.required]),
+    time: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+  });
 
   save() {
     if (this.form.valid) {
-      this._meeting.date = this.getDateFromStrings(this.form.value.date, this.form.value.time).toISOString();
+      this._meeting.date = this.getDateFromStrings(
+        this.form.value.date,
+        this.form.value.time
+      ).toISOString();
       this._meeting.location = this.form.value.location;
       this.saved.emit(this._meeting);
     }
@@ -78,5 +86,4 @@ export class MeetingFormComponent {
     d.setMinutes(+t[1]);
     return d;
   }
-
 }
