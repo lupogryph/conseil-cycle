@@ -1,0 +1,22 @@
+<mat-grid-list cols="7" rowHeight="2:1">
+  <mat-grid-tile>Lundi</mat-grid-tile>
+  <mat-grid-tile>Mardi</mat-grid-tile>
+  <mat-grid-tile>Mercredi</mat-grid-tile>
+  <mat-grid-tile>Jeudi</mat-grid-tile>
+  <mat-grid-tile>Vendredi</mat-grid-tile>
+  <mat-grid-tile>Samedi</mat-grid-tile>
+  <mat-grid-tile>Dimanche</mat-grid-tile>
+  @for (cal of calendar; track cal; let  c = $index) {
+    <mat-grid-tile>
+      <div class="tile">
+        <div class="day">{{cal.day}}</div>
+        @for (evt of cal.events; track evt.id; let  e = $index) {
+          <div class="event">
+            {{evt.date | date : 'HH:mm'}} {{evt.location}}
+          </div>
+        }
+      </div>
+    </mat-grid-tile>
+  }
+
+</mat-grid-list>

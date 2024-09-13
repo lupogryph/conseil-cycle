@@ -54,6 +54,9 @@ export class MeetingFormComponent {
   @Output()
   saved = new EventEmitter<MeetingDto>();
 
+  @Output()
+  cancel = new EventEmitter();
+
   form: FormGroup = new FormGroup({
     date: new FormControl('', [Validators.required]),
     time: new FormControl('', [
@@ -63,7 +66,7 @@ export class MeetingFormComponent {
     location: new FormControl('', [Validators.required]),
   });
 
-  save() {
+  _save() {
     if (this.form.valid) {
       let d = this.form.value.date;
       let t = this.form.value.time.split(':');
@@ -73,6 +76,10 @@ export class MeetingFormComponent {
       this._meeting.location = this.form.value.location;
       this.saved.emit(this._meeting);
     }
+  }
+
+  _cancel() {
+    this.cancel.emit();
   }
 
   getTimeFromDate(date: Date): string {

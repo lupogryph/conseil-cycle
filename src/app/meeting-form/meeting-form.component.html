@@ -1,6 +1,10 @@
-<div class="big-icon"><mat-icon>edit_calendar</mat-icon></div>
+<div class="left">
+  <div class="big-icon"><mat-icon>edit_calendar</mat-icon></div>
+  <div class="spacer"></div>
+  <button mat-stroked-button (click)="_cancel()">Annuler</button>
+</div>
 
-<form [formGroup]="form" (submit)="save()">
+<form [formGroup]="form" (submit)="_save()">
 <mat-form-field>
   <mat-label>Date</mat-label>
   <input matInput [matDatepicker]="picker" formControlName="date"/>

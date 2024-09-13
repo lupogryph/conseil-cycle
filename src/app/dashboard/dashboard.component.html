@@ -2,9 +2,14 @@
 
 <div class="content">
   <app-meetings class="left hide-scroll" [meetings]="meetings" (edit)="edit($event)"></app-meetings>
-  @if (mode != 'calendar' && _meeting) {
-    <app-meeting-form class="right hide-scroll" [meeting]="_meeting" (saved)="save($event)"></app-meeting-form>
-  }
+  <div class="right hide-scroll">
+    @if (mode != 'calendar' && _meeting) {
+      <app-meeting-form [meeting]="_meeting" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
+    }
+    @else {
+      <app-calendar></app-calendar>
+    }
+  </div>
 </div>
 
 <button mat-fab class="add" (click)="add()"><mat-icon>add</mat-icon></button>

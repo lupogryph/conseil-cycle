@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 import { CreateMeetingDto, MeetingDto, MeetingService } from '../openapi';
 import { MatButtonModule } from '@angular/material/button';
 import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     TopbarComponent,
+    CalendarComponent,
     MeetingsComponent,
     MeetingFormComponent,
     MatIconModule,
@@ -79,5 +81,6 @@ export class DashboardComponent {
   reset() {
     delete this._meeting;
     this.init();
+    this.mode = 'calendar';
   }
 }
