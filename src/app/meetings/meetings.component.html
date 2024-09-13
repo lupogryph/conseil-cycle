@@ -1,9 +1,12 @@
  @for (meeting of meetings; track meeting; let  i = $index) {
   <mat-card appearance="outlined">
-    <mat-card-header>
+    <!-- <mat-card-header>
       <mat-card-title>{{meeting.date | date: 'EEEE dd/MM/yyyy, HH:mm'}}</mat-card-title>
       <mat-card-subtitle>{{meeting.location}}</mat-card-subtitle>
-    </mat-card-header>
+    </mat-card-header> -->
+    <mat-card-content><mat-icon>event</mat-icon>{{meeting.date | date: 'EEEE dd/MM/yyyy'}}</mat-card-content>
+    <mat-card-content><mat-icon>schedule</mat-icon>{{meeting.date | date: 'HH:mm'}}</mat-card-content>
+    <mat-card-content><mat-icon>meeting_room</mat-icon>{{meeting.location}}</mat-card-content>
     <mat-card-actions>
       <button mat-icon-button class="del" (click)="_remove(i)"><mat-icon>delete</mat-icon></button>
       <button mat-icon-button class="edit" (click)="_edit(i)"><mat-icon>edit_calendar</mat-icon></button>

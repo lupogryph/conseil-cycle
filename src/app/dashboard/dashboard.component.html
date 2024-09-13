@@ -6,7 +6,7 @@
   </div>
   <div class="right">
     @if (mode != 'calendar' && _meeting) {
-      <app-meeting-form class="hide-scroll" [meeting]="_meeting" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
+      <app-meeting-form [meeting]="_meeting" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
     }
     @else {
       <app-calendar [meetings]="meetings" [year]="year" [month]="month"></app-calendar>
