@@ -82,7 +82,7 @@ export class MeetingFormComponent {
 
   _save() {
     if (this.form.valid) {
-      let d = this.form.value.date;
+      let d = this.form.value.date.toDate();
       let t = this.form.value.time.split(':');
       d.setHours(+t[0]);
       d.setMinutes(+t[1]);
