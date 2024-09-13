@@ -30,6 +30,9 @@ export class DashboardComponent {
 
   _meeting?: MeetingDto;
 
+  year: number = new Date().getFullYear();
+  month: number = new Date().getMonth();
+
   constructor(private meetingService: MeetingService) {}
 
   ngOnInit() {

@@ -1,13 +1,15 @@
 <app-topbar></app-topbar>
 
 <div class="content">
-  <app-meetings class="left hide-scroll" [meetings]="meetings" (edit)="edit($event)" (remove)="remove($event)"></app-meetings>
-  <div class="right hide-scroll">
+  <div class="left">
+    <app-meetings class="hide-scroll" [meetings]="meetings" (edit)="edit($event)" (remove)="remove($event)"></app-meetings>
+  </div>
+  <div class="right">
     @if (mode != 'calendar' && _meeting) {
-      <app-meeting-form [meeting]="_meeting" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
+      <app-meeting-form class="hide-scroll" [meeting]="_meeting" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
     }
     @else {
-      <app-calendar [meetings]="meetings" [year]="2024" [month]="8"></app-calendar>
+      <app-calendar class="hide-scroll" [meetings]="meetings" [year]="year" [month]="month"></app-calendar>
     }
   </div>
 </div>
