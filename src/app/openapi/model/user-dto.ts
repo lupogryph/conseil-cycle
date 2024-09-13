@@ -15,6 +15,7 @@ export interface UserDto {
     firstName?: string;
     name?: string;
     role?: UserDto.RoleEnum;
+    activated?: boolean;
 }
 export namespace UserDto {
     export type RoleEnum = 'user' | 'admin';

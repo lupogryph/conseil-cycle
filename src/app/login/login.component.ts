@@ -57,14 +57,16 @@ export class LoginComponent {
           this.router.navigate(['']);
         },
         error: (error) => {
-          this._snackBar.open('Echec de la connection', 'Fermer', {
-            duration: 3000,
+          this._snackBar.open(`Echec de la connection : ${error.error.message}`, 'Fermer', {
+            duration: 10000,
+            panelClass: ['red-snackbar'],
           });
         },
       });
     } else {
       this._snackBar.open('Identifiant invalide', 'Fermer', {
-        duration: 3000,
+        duration: 5000,
+        panelClass: ['red-snackbar']
       });
     }
   }

@@ -62,7 +62,7 @@ export class RegisterComponent {
     if (this.form.valid) {
       const user: CreateUserDto = <CreateUserDto>this.form.value;
       this.apiService.userControllerCreate(user).subscribe({
-        next: (user) => this.router.navigate(['connection']),
+        next: (user) => this.router.navigate(['login']),
         error: (error) =>
           this._snackBar.open('Echec de la creation', 'Fermer', {
             duration: 3000,

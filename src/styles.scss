@@ -29,3 +29,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .spacer {
   flex: 1 1 auto;
 }
+
+.mat-mdc-snack-bar-container {
+  &.red-snackbar {
+    --mdc-snackbar-container-color: #941818;
+    --mat-snack-bar-button-color: #fff;
+    // --mat-mdc-snack-bar-container: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
