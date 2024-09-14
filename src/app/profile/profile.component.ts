@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { userSignal } from '../../main';
 import { CurrentUserService } from '../current-user.service';
+import { FilterEmptyPipe } from '../filter-empty.pipe';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ import { CurrentUserService } from '../current-user.service';
     MatDatepickerModule,
     MatCardModule,
     JsonPipe,
+    FilterEmptyPipe,
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -62,13 +64,21 @@ export class ProfileComponent {
     private currentUserService: CurrentUserService,
   ) {
     effect(() => {
-      console.log(this.user());
-      this.form.reset(this.user());
+      console.log(this.profile());
+      this.form.reset(this.profile());
     });
   }
 
   _save() {
+    if (this.user()?.role != 'admin') {
+      this._snackBar.open(`Option désactivée`, 'Fermer', {
+        duration: 5000,
+      });
+      return;
+    }
     if (this.form.valid) {
+      let update = <UpdateUserDto>this.form.value;
+      update = new FilterEmptyPipe().transform(update);
       this.userService.userControllerUpdate(<UpdateUserDto>this.form.value).subscribe({
         next: (result) => {
           this.currentUserService.setUser();
