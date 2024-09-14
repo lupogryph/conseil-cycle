@@ -1,3 +1,4 @@
-.content {
-  height: calc(100vh - var(--mat-toolbar-standard-height));
+:host {
+  display: block;
+  padding: 16px;
 }

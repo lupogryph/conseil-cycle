@@ -15,7 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, MatDateFormats, provideNativeDateAdapter } from '@angular/material/core';
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
-import { JsonPipe } from '@angular/common';
+import { formatDate, JsonPipe } from '@angular/common';
 
 export const MY_FORMATS = {
   parse: {
@@ -55,7 +55,7 @@ export class MeetingFormComponent {
     if (meeting && meeting.date) {
       let date = new Date(meeting.date);
       this.form.reset({
-        date: date,
+        date: formatDate(date, 'yyyy-MM-dd', 'en'),
         time: this.getTimeFromDate(date),
         location: meeting.location,
       });
@@ -82,7 +82,7 @@ export class MeetingFormComponent {
 
   _save() {
     if (this.form.valid) {
-      let d = this.form.value.date.toDate();
+      let d = new Date(this.form.value.date);
       let t = this.form.value.time.split(':');
       d.setHours(+t[0]);
       d.setMinutes(+t[1]);

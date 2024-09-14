@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { TopbarComponent } from '../topbar/topbar.component';
 import { MeetingsComponent } from '../meetings/meetings.component';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable } from 'rxjs';
 import { CreateMeetingDto, MeetingDto, MeetingService } from '../openapi';
 import { MatButtonModule } from '@angular/material/button';
 import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointService } from '../breakpoint.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    TopbarComponent,
     CalendarComponent,
     MeetingsComponent,
     MeetingFormComponent,
@@ -33,7 +32,10 @@ export class DashboardComponent {
   year: number = new Date().getFullYear();
   month: number = new Date().getMonth();
 
-  constructor(private meetingService: MeetingService) {}
+  constructor(
+    private meetingService: MeetingService,
+    public breakpoint: BreakpointService
+  ) {}
 
   ngOnInit() {
     this.init();

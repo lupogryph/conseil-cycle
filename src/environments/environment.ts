@@ -8,6 +8,7 @@ export const environment = {
   VERSION: packageInfo.version,
   production: false,
   apiUrl: 'http://localhost:1337',
+  defaultUser: 'cdc@edu.fr'
 };
 
 /*

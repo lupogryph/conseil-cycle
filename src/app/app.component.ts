@@ -1,42 +1,24 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
 import { AuthApiService } from './auth.api.service';
-import { CookieService } from 'ngx-cookie-service';
-import { AuthService, Configuration, UserService } from './openapi';
-import { TopbarComponent } from './topbar/topbar.component';
-import { userSignal } from '../main';
-import { CurrentUserService } from './current-user.service';
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { LoginComponent } from './login/login.component';
+import { auth } from '../main';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent],
+  imports: [LoginComponent, DashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'conseil-de-cycle';
+  auth = auth;
 
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-    private authApiService: AuthApiService,
-    private currentUserService: CurrentUserService,
-  ) {}
+  constructor(private authApiService: AuthApiService) {}
 
   ngOnInit() {
-    const token = this.authApiService.getAccessToken();
-
-    if (!token) {
-      this.router.navigate(['enter']);
-    } else {
-      this.auth.authControllerGetProfile().subscribe({
-        next: () => this.currentUserService.setUser(),
-        error: (error) => {
-          this.authApiService.removeAccessToken();
-          this.router.navigate(['enter']);
-        },
-      });
+    if (this.authApiService.getAccessToken()) {
+      auth.set(true);
     }
   }
 }

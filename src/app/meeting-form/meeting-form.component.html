@@ -7,15 +7,11 @@
 <form [formGroup]="form" (submit)="_save()">
 <mat-form-field>
   <mat-label>Date</mat-label>
-  <input matInput [matDatepicker]="picker" formControlName="date"/>
-  <mat-hint>JJ/MM/AAAA</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
+  <input matInput type="date" placeholder="Date" formControlName="date">
 </mat-form-field>
 <mat-form-field>
   <mat-label>Heure</mat-label>
   <input matInput type="time" placeholder="Heure" formControlName="time">
-  <mat-icon matSuffix>schedule</mat-icon>
 </mat-form-field>
 <mat-form-field>
   <mat-label>Où ?</mat-label>

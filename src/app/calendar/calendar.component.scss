@@ -1,6 +1,7 @@
 :host {
   height: 100%;
   display: flex;
+  flex: auto;
   flex-direction: column;
 }
 .top {

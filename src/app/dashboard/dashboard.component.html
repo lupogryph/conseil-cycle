@@ -1,15 +1,13 @@
-<div class="content">
-  <div class="left">
-    <app-meetings class="hide-scroll" [meetings]="meetings" (edit)="edit($event)" (remove)="remove($event)"></app-meetings>
-  </div>
-  <div class="right">
-    @if (mode != 'calendar' && _meeting) {
-      <app-meeting-form [meeting]="_meeting" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
-    }
-    @else {
-      <app-calendar [meetings]="meetings" [year]="year" [month]="month"></app-calendar>
-    }
-  </div>
-</div>
+<!-- <div style="display: block; position: absolute; z-index: 999; background-color: blue;">{{breakpoint.isMobile}}</div> -->
+
+@if (!(mode != 'calendar' && breakpoint.isMobile)) {
+  <app-meetings class="hide-scroll" [style.width]="breakpoint.isMobile ? '100%' : '400px'" [meetings]="meetings" (edit)="edit($event)" (remove)="remove($event)"></app-meetings>
+}
+@if (mode != 'calendar' && _meeting) {
+  <app-meeting-form [meeting]="_meeting" [style.width]="breakpoint.isMobile ? '100%' : '400px'" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
+}
+@else if (!breakpoint.isMobile) {
+  <app-calendar [meetings]="meetings" [year]="year" [month]="month"></app-calendar>
+}
 
 <button mat-fab class="add" (click)="add()"><mat-icon>add</mat-icon></button>

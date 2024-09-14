@@ -1,16 +1,8 @@
-.content {
+:host {
   display: flex;
   height: 100%;
-  padding: 0 16px;
   flex-direction: row;
   gap: 3rem;
-  .left {
-    max-width: 320px;
-    flex: auto;
-  }
-  .right {
-    flex: auto;
-  }
 }
 
 button.add{
