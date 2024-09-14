@@ -7,7 +7,7 @@
   <app-meeting-form [meeting]="_meeting" [style.width]="breakpoint.isMobile ? '100%' : '400px'" (saved)="save($event)" (cancel)="reset()"></app-meeting-form>
 }
 @else if (!breakpoint.isMobile) {
-  <app-calendar [meetings]="meetings" [year]="year" [month]="month"></app-calendar>
+  <app-calendar [meetings]="meetings"></app-calendar>
 }
 
 <button mat-fab class="add" (click)="add()"><mat-icon>add</mat-icon></button>

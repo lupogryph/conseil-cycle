@@ -42,16 +42,7 @@ export class BreakpointService {
     }));
 
     this._breakpointSubscription.push(this.breakpointObserver.observe([
-      Breakpoints.Large
-    ]).subscribe( bp => {
-      if (bp.matches) {
-        this.isMobile = false;
-        this.isTablet = false;
-      }
-    }));
-
-    this._breakpointSubscription.push(this.breakpointObserver.observe([
-      Breakpoints.XLarge
+      Breakpoints.Large, Breakpoints.XLarge
     ]).subscribe( bp => {
       if (bp.matches) {
         this.isMobile = false;

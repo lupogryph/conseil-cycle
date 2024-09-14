@@ -1,4 +1,6 @@
-@if (auth()) {
+<!-- <div style="display: block; position: absolute; z-index: 999; background-color: blue;">{{currentUser.user() | json}}</div> -->
+
+@if (currentUser.user()) {
   <app-dashboard></app-dashboard>
 }
 @else {

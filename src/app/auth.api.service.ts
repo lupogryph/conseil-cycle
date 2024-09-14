@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { auth } from '../main';
+import { token } from '../main';
 
 const TOKEN = 'TOKEN';
 
@@ -8,13 +8,12 @@ const TOKEN = 'TOKEN';
   providedIn: 'root',
 })
 export class AuthApiService {
-  auth = auth;
+  token = token;
 
   constructor(private cookie: CookieService) {}
 
   public setAccessToken(token: string) {
     this.cookie.set(TOKEN, token);
-    this.auth.set(true);
   }
 
   public getAccessToken(): string {
@@ -23,6 +22,5 @@ export class AuthApiService {
 
   public removeAccessToken() {
     this.cookie.delete(TOKEN);
-    this.auth.set(false);
   }
 }
