@@ -5,7 +5,6 @@ import { CreateMeetingDto, MeetingDto, MeetingService } from '../openapi';
 import { MatButtonModule } from '@angular/material/button';
 import { MeetingFormComponent } from '../meeting-form/meeting-form.component';
 import { CalendarComponent } from '../calendar/calendar.component';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { BreakpointService } from '../breakpoint.service';
 
 @Component({

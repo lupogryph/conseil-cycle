@@ -3,7 +3,6 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { environment } from '../environments/environment';
-import { AuthApiService } from './auth.api.service';
 import { Configuration } from './openapi/configuration';
 
 import localeFr from '@angular/common/locales/fr';

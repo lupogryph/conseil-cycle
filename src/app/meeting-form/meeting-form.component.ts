@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, model, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MeetingDto } from '../openapi';
 import {
   FormControl,
@@ -13,8 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
-import { MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, MatDateFormats, provideNativeDateAdapter } from '@angular/material/core';
-import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { formatDate, JsonPipe } from '@angular/common';
 
 export const MY_FORMATS = {

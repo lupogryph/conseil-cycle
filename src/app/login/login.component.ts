@@ -10,10 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Auth, AuthService } from '../openapi';
-import { AuthApiService } from '../auth.api.service';
 import { environment } from '../../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -37,9 +36,8 @@ export class LoginComponent {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private router: Router,
     private authService: AuthService,
-    private authApiService: AuthApiService,
+    private cookieService: CookieService,
   ) {}
 
   connecter() {
@@ -48,8 +46,7 @@ export class LoginComponent {
       auth.email = environment.defaultUser;
       this.authService.authControllerConnecter(auth).subscribe({
         next: (token) => {
-          this.authApiService.setAccessToken(token.access_token);
-          this.router.navigate(['']);
+          this.cookieService.set('TOKEN', token.access_token);
         },
         error: (error) => {
           this._snackBar.open(`Echec de la connection : ${error.error.message}`, 'Fermer', {
