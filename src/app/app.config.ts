@@ -8,6 +8,7 @@ import { Configuration } from './openapi/configuration';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { TokenService } from './token.service';
 registerLocaleData(localeFr);
 
 export const appConfig: ApplicationConfig = {
@@ -18,12 +19,12 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
       provide: Configuration,
-      useFactory: (cookieService: CookieService) =>
+      useFactory: (tokenService: TokenService) =>
         new Configuration({
           basePath: environment.apiUrl,
-          credentials: { bearer: cookieService.get('TOKEN') },
+          credentials: { bearer: tokenService.getAccessToken.bind(tokenService) },
         }),
-      deps: [CookieService],
+      deps: [TokenService],
       multi: false,
     },
   ],

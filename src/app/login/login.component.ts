@@ -12,7 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Auth, AuthService } from '../openapi';
 import { environment } from '../../environments/environment';
-import { CookieService } from 'ngx-cookie-service';
+import { CurrentUserService } from '../current-user.service';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,8 @@ export class LoginComponent {
   constructor(
     private _snackBar: MatSnackBar,
     private authService: AuthService,
-    private cookieService: CookieService,
+    private tokenService: TokenService,
+    private currentUser: CurrentUserService,
   ) {}
 
   connecter() {
@@ -46,7 +48,8 @@ export class LoginComponent {
       auth.email = environment.defaultUser;
       this.authService.authControllerConnecter(auth).subscribe({
         next: (token) => {
-          this.cookieService.set('TOKEN', token.access_token);
+          this.tokenService.setAccessToken(token.access_token);
+          this.currentUser.refresh();
         },
         error: (error) => {
           this._snackBar.open(`Echec de la connection : ${error.error.message}`, 'Fermer', {
